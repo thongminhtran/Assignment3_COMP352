@@ -6,8 +6,16 @@ public class Entry implements Map.Entry<Integer,String> {
     public Entry(Integer k,String v) {
         K = k;
         V = v;
-
     }
+
+    public void setK(Integer k) {
+        K = k;
+    }
+
+    public void setV(String v) {
+        V = v;
+    }
+
     public Entry(Entry another){
         this.K = another.K;
         this.V = another.V;
@@ -20,18 +28,14 @@ public class Entry implements Map.Entry<Integer,String> {
 
     @Override
     public String getValue() {
-        return null;
+        return V;
     }
 
     @Override
     public String setValue(String value) {
-        String temp = V;
-        V = value;
-        return temp;
+        this.V = value;
+        return null;
     }
 
-    public void setKey(Integer key){
-        K = key;
-    }
 
 }
