@@ -28,18 +28,52 @@ public class MyPQSortedList implements MyPQ<Integer,String> {
         if(head==null)
             head=newNode;
         size++;
+        sortList();
+    }
+    public void sortList(){
+        // Reference: https://www.javatpoint.com/java-program-to-sort-the-elements-of-the-doubly-linked-list
+        Node current = null, index = null;
+        Entry temp;
+        if(head == null)
+            return;
+        else{
+            for(current=head;current.next!=null;current=current.next){
+                for(index = current.next;index!=null;index=index.next){
+                    if(current.data.getK()>index.data.getK()){
+                        temp = current.data;
+                        current.data = index.data;
+                        index.data = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    public void printLinkedListForward(){
+        System.out.println("Printing Doubly LinkedList (head-->tail) ");
+        Node current = head;
+        while (current!=null){
+            current.displayNodeData();
+            current = current.next;
+        }
+        System.out.println();
     }
 
     @Override
     public Entry min() {
-        //TODO
-        return null;
+        if(isEmpty())
+            return null;
+        return head.data;
     }
 
     @Override
     public Entry removeMin() {
-        //TODO
-        return null;
+        if(isEmpty())
+            return null;
+        head = head.next;
+        head.prev = null;
+        size--;
+        return this.min();
     }
 
     @Override

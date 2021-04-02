@@ -40,12 +40,47 @@ public class MyPQUnsortedList implements MyPQ<Integer,String> {
         System.out.println();
     }
     public Entry min(){
-        // TODO:
+        if(isEmpty())
+            return null;
+        Node current = head;
+        int min = current.data.getK();
+        while(current!=null){
+            if(min > current.data.getK()){
+                min = current.data.getK();
+            }
+            current = current.next;
+        }
+        current = head;
+        while(current!=null){
+            if(min == current.data.getK()){
+                return current.data;
+            }
+            current = current.next;
+        }
         return null;
     }
+    // Delete from Doubly linked list: https://stackoverflow.com/questions/49700276/deleting-from-doubly-linked-list-java
     public Entry removeMin(){
-        //TODO
-        return null;
+        if(isEmpty())
+            return null;
+        Node current = head;
+        while (current!=null&&current.data!=this.min()){
+            current = current.next;
+        }
+        deleteNode(current);
+        return this.min();
+    }
+    public void deleteNode(Node node){
+        if(node!=null){
+            if(node.prev!=null)
+                node.prev.next = node.next;
+            else
+                head = node.next;
+            if(node.next!=null)
+                node.next.prev = node.prev;
+            else
+                tail = node.prev;
+        }
     }
     public int size(){
         return this.size;
