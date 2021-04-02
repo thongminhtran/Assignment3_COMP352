@@ -9,32 +9,30 @@ public class PQTester {
 
     public static void main(String[] args) throws FileNotFoundException {
         String pathName = "";
-        if(N>=1 && N<10000){
+        if (N >= 1 && N < 10000) {
             pathName = "elements_test_file1.txt";
-        }
-        else if(N>=10000&&N<100000){
+        } else if (N >= 10000 && N < 100000) {
             pathName = "elements_test_file2.txt";
-        }
-        else if(N>=100000 &&N<=1000000){
+        } else if (N >= 100000 && N <= 1000000) {
             pathName = "elements_test_file3.txt";
-        }
-        else{
+        } else {
             System.out.println("N is out of range => Exit");
             System.exit(0);
         }
         Scanner scanner = new Scanner(new File(pathName));
-        testSortedArray(scanner);
+    //    testSortedArray(scanner);
         //Measure running time of unsorted array
 
-       testUnsortedArray(scanner);
+    //    testUnsortedArray(scanner);
 
         //Measure running time of UnsortedList
-       testUnSortedList(scanner);
+    //    testUnSortedList(scanner);
 
         //Measure running time of sorted list
         testSortedList(scanner);
     }
-    public static void testSortedList(Scanner scanner){
+
+    public static void testSortedList(Scanner scanner) {
         MyPQSortedList myPQSortedList = new MyPQSortedList();
         double count = 0;
         double startTime = System.nanoTime();
@@ -55,7 +53,8 @@ public class PQTester {
         totalTime = (stopTime - startTime) / 1000000.0;
         System.out.println("Running time of remove function of sorted list: " + totalTime);
     }
-    public static void testUnSortedList(Scanner scanner){
+
+    public static void testUnSortedList(Scanner scanner) {
         MyPQUnsortedList myPQUnsortedList = new MyPQUnsortedList();
         int count = 0;
         double startTime = System.nanoTime();
@@ -77,7 +76,7 @@ public class PQTester {
         System.out.println("Running time of remove function of unsorted list: " + totalTime);
     }
 
-    public static void testUnsortedArray(Scanner scanner){
+    public static void testUnsortedArray(Scanner scanner) {
         MYPQUnsortedArray mypqUnsortedArray = new MYPQUnsortedArray();
         int count = 0;
         double startTime = System.nanoTime();
@@ -98,6 +97,7 @@ public class PQTester {
         totalTime = (stopTime - startTime) / 1000000.0;
         System.out.println("Running time of remove function of unsorted array: " + totalTime);
     }
+
     public static void testSortedArray(Scanner scanner) {
         int realSize = 0;
         MyPQSortedArray myPQSortedArray = new MyPQSortedArray();
@@ -120,6 +120,7 @@ public class PQTester {
         totalTime = (stopTime - startTime) / 1000000.0;
         System.out.println("Running time of remove function of sortedArray: " + totalTime);
     }
+
     /**
      * Generate a random integer from range 1 to N
      */
