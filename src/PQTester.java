@@ -5,17 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PQTester {
 
-    public static int N = 9999;
+    public static int N = 10;
 
     public static void main(String[] args) throws FileNotFoundException {
-        // write your code here
-//        myPQSortedArray.insert(2,"Thong");
-//        myPQSortedArray.insert(5, "An");
-
-//        myPQUnsortedList.insert(12,"erjrfef");
-//        myPQUnsortedList.insert(15,"evetrwq");
-//        myPQUnsortedList.insert(9,"klerjhb");
-//        myPQUnsortedList.insert(4,"kwenkjwen");
         String pathName = "";
         if(N>=1 && N<10000){
             pathName = "elements_test_file1.txt";
@@ -31,28 +23,7 @@ public class PQTester {
             System.exit(0);
         }
         Scanner scanner = new Scanner(new File(pathName));
-        int count = 0;
-        MyPQSortedArray myPQSortedArray = new MyPQSortedArray();
-
-        //Measure running time of Sorted Array
-        double startTime = System.nanoTime();
-        while (scanner.hasNextLine() && count < N) {
-            myPQSortedArray.insert(generateRandomInteger(), scanner.nextLine());
-            count++;
-        }
-        double stopTime = System.nanoTime();
-        double totalTime = (stopTime - startTime) / 1000000.0;
-        System.out.println("Running time of insert function of sorted array is " + totalTime);
-        startTime = System.nanoTime();
-        count = N;
-        while (count > 1) {
-            myPQSortedArray.removeMin();
-            count--;
-        }
-        stopTime = System.nanoTime();
-        totalTime = (stopTime - startTime) / 1000000.0;
-        System.out.println("Running time of remove function of sortedArray: " + totalTime);
-
+        testSortedArray(scanner);
         //Measure running time of unsorted array
         MYPQUnsortedArray mypqUnsortedArray = new MYPQUnsortedArray();
         count = 0;
@@ -117,6 +88,28 @@ public class PQTester {
         System.out.println("Running time of remove function of sorted list: " + totalTime);
     }
 
+    public static void testSortedArray(Scanner scanner) {
+        int realSize = 0;
+        MyPQSortedArray myPQSortedArray = new MyPQSortedArray();
+        // Read file
+        double startTime = System.nanoTime();
+        while (scanner.hasNextLine() && realSize < N) {
+            myPQSortedArray.insert(generateRandomInteger(), scanner.nextLine());
+            realSize++;
+        }
+        double stopTime = System.nanoTime();
+        double totalTime = (stopTime - startTime) / 1000000.0;
+        System.out.println("Running time of insert function of sorted array is " + totalTime);
+        startTime = System.nanoTime();
+        realSize = N;
+        while (realSize > 1) {
+            myPQSortedArray.removeMin();
+            realSize--;
+        }
+        stopTime = System.nanoTime();
+        totalTime = (stopTime - startTime) / 1000000.0;
+        System.out.println("Running time of remove function of sortedArray: " + totalTime);
+    }
     /**
      * Generate a random integer from range 1 to N
      */
