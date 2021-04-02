@@ -25,57 +25,25 @@ public class PQTester {
         Scanner scanner = new Scanner(new File(pathName));
         testSortedArray(scanner);
         //Measure running time of unsorted array
-        MYPQUnsortedArray mypqUnsortedArray = new MYPQUnsortedArray();
-        count = 0;
-        startTime = System.nanoTime();
-        while (scanner.hasNextLine() && count < N) {
-            mypqUnsortedArray.insert(generateRandomInteger(), scanner.nextLine());
-            count++;
-        }
-        stopTime = System.nanoTime();
-        totalTime = (stopTime - startTime) / 1000000.0;
-        System.out.println("Running time of insert function of unsorted array is " + totalTime);
-        startTime = System.nanoTime();
-        count = N;
-        while (count > 1) {
-            mypqUnsortedArray.removeMin();
-            count--;
-        }
-        stopTime = System.nanoTime();
-        totalTime = (stopTime - startTime) / 1000000.0;
-        System.out.println("Running time of remove function of unsorted array: " + totalTime);
+
+       testUnsortedArray(scanner);
 
         //Measure running time of UnsortedList
-        MyPQUnsortedList myPQUnsortedList = new MyPQUnsortedList();
-        count = 0;
-        startTime = System.nanoTime();
-        while (scanner.hasNextLine() && count < N) {
-            myPQUnsortedList.insert(generateRandomInteger(), scanner.nextLine());
-            count++;
-        }
-        stopTime = System.nanoTime();
-        totalTime = (stopTime - startTime) / 1000000.0;
-        System.out.println("Running time of insert function of unsorted list is " + totalTime);
-        startTime = System.nanoTime();
-        count = N;
-        while (count > 1) {
-            myPQUnsortedList.removeMin();
-            count--;
-        }
-        stopTime = System.nanoTime();
-        totalTime = (stopTime - startTime) / 1000000.0;
-        System.out.println("Running time of remove function of unsorted list: " + totalTime);
+       testUnSortedList(scanner);
 
         //Measure running time of sorted list
+        testSortedList(scanner);
+    }
+    public static void testSortedList(Scanner scanner){
         MyPQSortedList myPQSortedList = new MyPQSortedList();
-        count = 0;
-        startTime = System.nanoTime();
+        double count = 0;
+        double startTime = System.nanoTime();
         while (scanner.hasNextLine() && count < N) {
             myPQSortedList.insert(generateRandomInteger(), scanner.nextLine());
             count++;
         }
-        stopTime = System.nanoTime();
-        totalTime = (stopTime - startTime) / 1000000.0;
+        double stopTime = System.nanoTime();
+        double totalTime = (stopTime - startTime) / 1000000.0;
         System.out.println("Running time of insert function of sorted list is " + totalTime);
         startTime = System.nanoTime();
         count = N;
@@ -87,7 +55,49 @@ public class PQTester {
         totalTime = (stopTime - startTime) / 1000000.0;
         System.out.println("Running time of remove function of sorted list: " + totalTime);
     }
+    public static void testUnSortedList(Scanner scanner){
+        MyPQUnsortedList myPQUnsortedList = new MyPQUnsortedList();
+        int count = 0;
+        double startTime = System.nanoTime();
+        while (scanner.hasNextLine() && count < N) {
+            myPQUnsortedList.insert(generateRandomInteger(), scanner.nextLine());
+            count++;
+        }
+        double stopTime = System.nanoTime();
+        double totalTime = (stopTime - startTime) / 1000000.0;
+        System.out.println("Running time of insert function of unsorted list is " + totalTime);
+        startTime = System.nanoTime();
+        count = N;
+        while (count > 1) {
+            myPQUnsortedList.removeMin();
+            count--;
+        }
+        stopTime = System.nanoTime();
+        totalTime = (stopTime - startTime) / 1000000.0;
+        System.out.println("Running time of remove function of unsorted list: " + totalTime);
+    }
 
+    public static void testUnsortedArray(Scanner scanner){
+        MYPQUnsortedArray mypqUnsortedArray = new MYPQUnsortedArray();
+        int count = 0;
+        double startTime = System.nanoTime();
+        while (scanner.hasNextLine() && count < N) {
+            mypqUnsortedArray.insert(generateRandomInteger(), scanner.nextLine());
+            count++;
+        }
+        double stopTime = System.nanoTime();
+        double totalTime = (stopTime - startTime) / 1000000.0;
+        System.out.println("Running time of insert function of unsorted array is " + totalTime);
+        startTime = System.nanoTime();
+        count = N;
+        while (count > 1) {
+            mypqUnsortedArray.removeMin();
+            count--;
+        }
+        stopTime = System.nanoTime();
+        totalTime = (stopTime - startTime) / 1000000.0;
+        System.out.println("Running time of remove function of unsorted array: " + totalTime);
+    }
     public static void testSortedArray(Scanner scanner) {
         int realSize = 0;
         MyPQSortedArray myPQSortedArray = new MyPQSortedArray();
