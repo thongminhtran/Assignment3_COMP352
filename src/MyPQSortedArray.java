@@ -1,5 +1,7 @@
 public class MyPQSortedArray implements MyPQ<Integer,String>{
     private Entry[] entries = new Entry[1];
+    int realSize = 0;
+
     @Override
     public Entry min() {
         if (this.isEmpty()) {
@@ -7,7 +9,6 @@ public class MyPQSortedArray implements MyPQ<Integer,String>{
         }
         return this.entries[0];
     }
-
     @Override
     public void insert(Integer k, String v) {
         boolean isFullArray = this.entries[this.entries.length-1] != null;

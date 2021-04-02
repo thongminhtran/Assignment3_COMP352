@@ -61,31 +61,33 @@ public class MYPQUnsortedArray implements MyPQ<Integer, String> {
         // [3,1,2] ==> [3,2] ==> position = 1;
         boolean isPositionValid = position < realSize && realSize > 0;
         if (!isPositionValid) throw new Exception("Position " + position + " is more than the real size " + realSize);
-        int expectedSizeAfterRemovingItem = realSize - 1;
-        boolean isExpectedSizeAfterRemovingItemLessThan25PercentageCapacity = expectedSizeAfterRemovingItem < 0.4 * this.entries.length;
-        if (isExpectedSizeAfterRemovingItemLessThan25PercentageCapacity) {
-            expectedSizeAfterRemovingItem = expectedSizeAfterRemovingItem / 2;
+        int expectedRealSizeAfterRemovingOneItem = realSize - 1;
+        int currentCapacity = this.entries.length;
+        boolean isSizeLessThan25Percentage = expectedRealSizeAfterRemovingOneItem < 0.25 * currentCapacity;
+        if (isSizeLessThan25Percentage) {
+            currentCapacity = currentCapacity / 2;
         }
-        Entry[] temporaryEntries = new Entry[expectedSizeAfterRemovingItem];
-        // Copy the first element
+        Entry[] temporaryEntries = new Entry[currentCapacity];
         if (position == 0) {
             // Remove first element
+            int temporaryRealSize = 0;
             for (int index = 1; index < realSize; index ++) {
-                temporaryEntries[index - 1] = this.entries[index];
+                temporaryEntries[temporaryRealSize] = this.entries[index];
+                temporaryRealSize++;
             }
         } else {
-            int temporaryEntriesIndex = 0;
+            int temporaryRealSize = 0;
             // Copy the beginning
-            for (int index = 0; index < position - 1; index ++) {
-                temporaryEntries[temporaryEntriesIndex] = this.entries[index];
-                temporaryEntriesIndex++;
+            for (int index = 0; index < position; index ++) {
+                temporaryEntries[temporaryRealSize] = this.entries[index];
+                temporaryRealSize++;
             }
             // Copy the rest
             boolean isLastElement = position == realSize - 1;
             if (!isLastElement) {
                 for (int index = position + 1; index < realSize; index ++) {
-                    temporaryEntries[temporaryEntriesIndex] = this.entries[index];
-                    temporaryEntriesIndex++;
+                    temporaryEntries[temporaryRealSize] = this.entries[index];
+                    temporaryRealSize++;
                 }
             }
         }
