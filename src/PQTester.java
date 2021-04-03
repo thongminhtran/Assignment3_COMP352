@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PQTester {
 
-    public static int N = 10;
+    public static int N = 100000;
 
     public static void main(String[] args) throws FileNotFoundException {
         String pathName = "";
@@ -20,15 +20,9 @@ public class PQTester {
             System.exit(0);
         }
         Scanner scanner = new Scanner(new File(pathName));
-    //    testSortedArray(scanner);
-        //Measure running time of unsorted array
-
-    //    testUnsortedArray(scanner);
-
-        //Measure running time of UnsortedList
-    //    testUnSortedList(scanner);
-
-        //Measure running time of sorted list
+        testSortedArray(scanner);
+        testUnsortedArray(scanner);
+        testUnSortedList(scanner);
         testSortedList(scanner);
     }
 

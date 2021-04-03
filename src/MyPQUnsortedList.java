@@ -1,88 +1,82 @@
-public class MyPQUnsortedList implements MyPQ<Integer,String> {
-    public class Node{
-        public Entry data;
+public class MyPQUnsortedList implements MyPQ<Integer, String> {
+    public class Node {
+        public Entry entry;
         public Node next;
         public Node prev;
-        public void displayNodeData(){
-            System.out.println("k= "+data.getK()+"value= "+data.getV()+"-->");
+
+        public Node(Entry entry) {
+            this.entry = entry;
         }
     }
-    public MyPQUnsortedList(){
 
-    }
-    private Node head;
-    private Node tail;
+    private Node head, tail;
     int size;
-    public boolean isEmpty(){
-        return head==null;
+
+    @Override
+    public boolean isEmpty() {
+        return head == null;
     }
-    public void insert(Integer k,String v){
-        Entry entry = new Entry(k,v);
-        Node newNode = new Node();
-        newNode.data = entry;
+
+    @Override
+    public void insert(Integer k, String v) {
+        Entry entry = new Entry(k, v);
+        Node newNode = new Node(entry);
         newNode.next = null;
         newNode.prev = tail;
-        if(tail!=null){
-            tail.next=newNode;
+        if (tail != null) {
+            tail.next = newNode;
         }
-        tail=newNode;
-        if(head==null)
-            head=newNode;
+        tail = newNode;
+        if (head == null)
+            head = newNode;
         size++;
     }
-    public void printLinkedListForward(){
-        System.out.println("Printing Doubly LinkedList (head-->tail) ");
-        Node current = head;
-        while (current!=null){
-            current.displayNodeData();
-            current = current.next;
-        }
-        System.out.println();
-    }
-    public Entry min(){
-        if(isEmpty())
+
+    @Override
+    public Entry min() {
+        if (isEmpty())
             return null;
         Node current = head;
-        int min = current.data.getK();
-        while(current!=null){
-            if(min > current.data.getK()){
-                min = current.data.getK();
+        Entry currentMinEntry = current.entry;
+        while (current != null) {
+            if (currentMinEntry.getK() > current.entry.getK()) {
+                currentMinEntry = current.entry;
             }
             current = current.next;
         }
-        current = head;
-        while(current!=null){
-            if(min == current.data.getK()){
-                return current.data;
-            }
-            current = current.next;
-        }
-        return null;
+        return currentMinEntry;
     }
+
     // Delete from Doubly linked list: https://stackoverflow.com/questions/49700276/deleting-from-doubly-linked-list-java
-    public Entry removeMin(){
-        if(isEmpty())
+    @Override
+    public Entry removeMin() {
+        if (isEmpty())
             return null;
         Node current = head;
-        while (current!=null&&current.data!=this.min()){
+        Entry minEntry = min();
+        while (current != null && current.entry != this.min()) {
             current = current.next;
         }
         deleteNode(current);
-        return this.min();
+        return minEntry;
     }
-    public void deleteNode(Node node){
-        if(node!=null){
-            if(node.prev!=null)
+
+    private void deleteNode(Node node) {
+        if (node != null) {
+            if (node.prev != null)
                 node.prev.next = node.next;
-            else
+            else {
                 head = node.next;
-            if(node.next!=null)
+            }
+            if (node.next != null)
                 node.next.prev = node.prev;
             else
                 tail = node.prev;
         }
     }
-    public int size(){
+
+    @Override
+    public int size() {
         return this.size;
     }
 }
